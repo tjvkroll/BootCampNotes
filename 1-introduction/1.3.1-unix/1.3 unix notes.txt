@@ -1,0 +1,32 @@
+Commands: 
+
+general: 
+ls
+mkdir
+ls -a (hidden files)
+touch - 
+man - man pages 
+
+find - may not be able to access some directories but should find files
+
+File redirection: 
+cat - concatenate and print files to console
+echo - repeats back exactly what you give it (can echo into beginning of files with > and at the end of files with >> )
+
+
+Searching files: 
+grep - search a file for a pattern. if it find the pattern it prints out the whole ling by default
+
+
+Moving files: 
+mv - move  
+cp - copy
+rm - remove (-r for directories)
+
+
+other useful command: 
+pwd - prints working directory path
+which - (ex: which java) print the path to the specified executable
+chmod - Sets the permissions of files or directories (ex: chmod +x my_script.sh)
+chown - Change user or group ownership of a given argument (ex: chown user:group my_file)
+ctrl + r - search through command line history

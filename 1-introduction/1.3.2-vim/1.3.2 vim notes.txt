@@ -1,0 +1,53 @@
+Vim: 
+
+Modes: 
+insert - insert test as if it was a normal editor
+normal - move around the file and manipulate text
+visual - select blocks of text
+Command- select command to vim 
+
+Normal: 
+Can be accessed from other modes using "esc"
+
+normal commands: 
+
+i - switches to insert
+h or left arrow - moves the cursor left one char
+j or down arrow - moves the cursor down one char
+k or up arrow - moves the cursor up one char
+l or right arrow - moves the cursor right one char
+w - move cursor to beg. of next word
+b - move cursor to beg. of previous word
+e - move cursor to end of next word
+0 - move cursor the beg. of the line
+$ - move cursor to the end of line
+yy - copy current line into buffer
+p - paste whts in buffer
+
+Insert: 
+
+insert commands: 
+i - enter insert modes
+esc - return to normal modes
+a - moves the cursor after the current char and enters insert modes
+A - moves the cursor to the end of line and enters insert modes
+o - inserts a new line below current line and enters insert modes
+O - inserts a newline above the current line and enters inseert modes
+
+
+Visual mode: 
+
+visual commands: 
+v - enter visual mdoe and mark selection start point
+y - copy the current selection into buffer
+d - delete current selection
+
+
+Command mode: 
+command commands: 
+
+: - insert command mode
+w - save the file
+q - quit vim 
+wq - Save and quit from vim
+

@@ -1,0 +1,62 @@
+Github has 2 specialized API that share a lot of functionality but work differently and provide additionals that the other might not
+
+APIs:
+    REST
+    GraphQL
+
+Overviews: 
+
+    REST: 
+        much older of the two. 
+        Much easier to navigate than GraphQL but is MUCH less flexible
+        Returns Bulk JSON data that you have to sift through. 
+
+    GraphQL: 
+        Newer of the two
+        Takes a bit more setup but allows for cleaner requests and returns. 
+        Opposed to getting a large amount of JSON data like REST you can query exactly the values you need. 
+        GraphQL uses a points system that is determined by the amount of nodes you are visiting in order to calculate the appropriate rate cost for the API call. 
+        Best way to interact with GraphQL is through Github's GraphQL Explorer. it's a tool that lets you find exactly what you are looking for and generate a query without having to sift through the somewhat confusing docs to craft a query that might not work. 
+
+USING APIs:
+
+    REST: 
+
+        CLI: 
+            Making requests:
+                To make a request using GitHub CLI, use the api subcommand along with the path. Use the --method or -X flag to specify the method.
+
+            headers:
+                Most operations specify that you should pass an Accept header with a value of application/vnd.github+json. Other operations may specify that you should send a different Accept header or additional headers.
+                To send a header with GitHub CLI, use the --header or -H flag followed by the header in key: value format.
+                    EXAMPLE: gh api --header 'Accept: application/vnd.github+json' --header 'X-GitHub-Api-Version:2022-11-28' --method GET /octocat
+
+            Path parameters:
+                Path parameters modify the operation path. For example, the "List repository issues" path is /repos/{owner}/{repo}/issues. The curly brackets {} denote path parameters that you need to specify. In this case, you must specify the repository owner and name.
+                    EXAMPLE: gh api --header 'Accept: application/vnd.github+json' --method GET /repos/octocat/Spoon-Knife/issues
+
+            Query parameters: 
+                Allows you to control what data is returned for a request.
+                You can use parameters like per_page, sort, and direction to modify returns from queries. 
+                For GitHub CLI, use the -F flag to pass a parameter that is a number, Boolean, or null. Use -f to pass string parameters.
+                    EXAMPLE: gh api --header 'Accept: application/vnd.github+json' --method GET /repos/octocat/Spoon-Knife/issues -F per_page=2 -f sort=updated -f direction=asc
+
+            Body parameters:
+                Allows you to pass additional data to the API. For example the "create an issue" operation requires you to specify a title for the new issue. It also lets you specify the other info, such as text to put in the issue body. 
+                The "Create an issue" operation uses the same path as the "List repository issues" operation in the examples above, but it uses a POST method instead of a GET method.
+                For GitHub CLI, use the -F flag to pass a parameter that is a number, Boolean, or null. Use -f to pass string parameters.
+                    EXAMPLE: gh api --header 'Accept: application/vnd.github+json' --method POST /repos/octocat/Spoon-Knife/issues -f title="Created with the REST API" -f body="This is a test issue created by the REST API"
+
+            Using the respones:
+                Every request will return and HTTP status code that indicates the success of the response.
+                Additionally, the response will include headers that give more details about the response. Headers that start with X- or x- are custom to Github. For example, the x-ratelimit-remaining and x-ratelimit-reset headers tell you how many requests you can make in a time period. 
+                To view the status code and headers use the --include or --i flag when you send your request. 
+
+                About the response body: 
+                    Many operations will return a respnse body. Unless otherwise specified, the response body is in a JSON format. 
+                    Unlike GraphQL the RESt API typically returns more information than you need. If desired, you can parse the response to pull out specific pieces of information. 
+                        for example you can use > to redirect the response to a file to be parsed through. 
+                        You can also use jq to get the title and author ID of each issue. 
+
+ 
+

@@ -1,0 +1,25 @@
+General networking: 
+
+ip addresses: 
+ipv4 - 4 numbers (0-255) separated by periods
+ipv6 - eight groups of four hex. digits separated by colons
+
+DHCP - dynamic host config. protocol 
+
+Hostnames: 
+human readable addresses that all have an associated ip address. 
+
+Ports: 
+#s representing the different connections that a device can have the same time, similar to the letters addressed to different people at the same physical address. 
+often denoted following a hostname and separated by a colon ( ex: localhost:8000 )
+
+popular ports: 
+ssh - port 22
+http - port 80 
+https - port 443
+
+Subnets: 
+Uses masks to generate divided networks with the limited number of ipv4 addresses available. 
+ex: 192.16.0.36/24 has a mask of 255.255.255.0 and a network address of 192.169.0.0
+
+Private IP Ranges: 

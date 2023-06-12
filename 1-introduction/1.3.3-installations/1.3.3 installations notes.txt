@@ -1,0 +1,39 @@
+Package Managers (for installing and maintaining software):
+yum - RHEL based distrios such as CentOS
+apt - Debian based distrios such as Ubuntu
+pacman - Arch 
+apk - Alpine
+Homebrew - Macs
+
+
+Finding packages: 
+search - searches for packages you need
+ex: brew search openjdk
+
+
+Installing packages: 
+install - installs the package along with its dependencies
+ex: brew cask install adoptopenjdk
+
+
+Unavailable packages: 
+Sometimes a package isnt available and you will need to add the repo, if this is an option the repo URL will be available 
+
+general steps: 
+Download the repo key (wget, curl)
+Update your package list
+Install the package
+
+In yum, this is often done in the etc/yum.repos.d file. With apt-get, this is done with the update. 
+
+
+Manage Installed Packages: 
+
+Check for updates: 
+brew update
+brew outdated
+
+Install updates: 
+brew upgrade
+
+

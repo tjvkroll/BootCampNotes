@@ -1,0 +1,21 @@
+Security: 
+
+Passwords: 
+follow general best practices (pretty obvious)
+
+Password managers: 
+
+Kneepass: lets you manage your passwords in a local encrypted database so you only have to worry about remembering one password
+
+Lastpass: Online password management system
+
+1Password: Lastpass competitor that many have been moving to
+
+
+Public Key Authentication:
+generates pair of cryptographic keys (public and private)
+
+SSH: 
+makes use of public key auth. to allow for passwordless and non-interactive access to remote hosts. 
+to use we need to generate keys and add them to authorized keys list. 
+

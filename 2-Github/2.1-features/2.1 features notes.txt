@@ -1,0 +1,29 @@
+Issues: 
+Keep track of general to-do's 
+Allows labels to see what the issue is related to as well as who is assigned to the issue and who created it. 
+Milestones in order to keep track of progress on that specific issue
+
+Actions: 
+Github's system for poplines and automation.
+Allows for things like: 
+Workflows to performs specific actions on triggers like building apps, running tests, and integrate other github features as well as 3rd party services. 
+Promotes code-reuse by allowing for custon actions that can be thought of as scripts that can be made public or private to the github community.
+
+
+Projects: 
+Organizational tool that integrates issues to track workflow more effectively. 
+Allows for: 
+Kanban boards and all functionality they provide to software development
+Creating roadmaps to add a visual timeframe element to your project and related issue. 
+
+Pages: 
+Allows you to publish a website based on HTML,CSS, and Javascript available in your repo. You can publish one website per account or org. and unlimited for a project. It also allows you to publish the site under githubs own domain, optionally of course. 
+
+Security: 
+Dependabot - automatically alerts you to out of date packages and dependencies and update them should you enable the feature. 
+If you have an advanced security liscense you can get code scanning which analyzes code in your repo to check for vulnerabilities and errors, secret scanning which checks to see if thingsk like tokens and private keys were pushed, and lastly dependency review which shows thee impact of a pull request on your dependencies so you can catch vulnerabilities before you introduce them. 
+
+
+API: 
+Github has a REST and GraphQL API that gives us accesss to view, create, delete, and update most of the resources we'd interact with on github. This gives us the power to create automation and use github features in our code. 
+
