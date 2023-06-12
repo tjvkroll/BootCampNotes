@@ -1,0 +1,58 @@
+Workflows:
+
+    All workflows must have 3 basic components: 
+        One or more events that will trigger the workflow (can be manually triggered or set to be callable)
+        One or more Jobs, each of which will execute on a runner machine and run a series of one or more steps
+        Each step can either run a script that I define or run an action, which is a reuseable extension that can simplify my workflow.
+
+    Triggers: 
+        Can be anything that occur's in your workflows repo
+        manually
+        scheduled
+        Events that occur outside of github and tigger a "repository_dispatch" even on Github
+
+
+    Workflow syntax:
+        name: This will be the workflows name listed under the actions tab
+        run-name: This will be the name generated in the list of workflow runs under the action tab. 
+        on: This is where we will list the events or event that will trigger the workflow
+            ex. on: push      or    on: [push, fork, pull]
+        
+            Can also use activity types like issues being created. 
+            ex.  on:
+                    label:
+                        types:
+                            -created
+                This example will run the workflow when activities are created. 
+
+            Can also trigger on issues
+            ex. on:
+                    issues:
+                        types:
+                            - opened
+                            - labeled
+                This will run the workflow upon opening or labeling and issue
+
+            Filters can also be applied to trigger events for a more fine-grained control over runs. 
+            We can also make the workflow reuseable by adding the "workflow_call" under the "on:" section. 
+            Or manually by adding "workflow_dispatch" 
+
+        env: is a map of all variables that are available to the steps of all jobs in the workflow. You can also limit the scope of variables to single jobs or steps. 
+            env variables that share a name at different scopes will use the most specific level of scope. scope levels: workflow -> job -> step
+
+        Defaults: You can use defaults.run to proved default shell and working directory options for all run steps in the workflow. You can also set default settings for run that are only available to a job. 
+
+        jobs: middle scope of workflow, between workflow and steps. A job can have multiple steps within it. 
+
+            There is a ton of documentation on jobs, steps, etc. here: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions#env
+
+
+
+Actions: 
+
+    An action is a custion application that performs complex and frequently repeated tasks. We can think of actions as functions.
+    We can create custon actions that can be called in workflows, or draw from Githubs extensive collection of prefabed actions. 
+    A few example actions are things like docker build and run, testing suites, pushing to cloud servers, logging in to different utilities, etc. 
+
+
+    

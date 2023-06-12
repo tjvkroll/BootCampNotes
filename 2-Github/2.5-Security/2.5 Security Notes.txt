@@ -1,0 +1,23 @@
+Code Scanning: 
+    Github allows you to scan code for security vulnerabilities. It works by integrating 3rd party static analysis tools as welll as Github's CodeQL which has its own criteria of security issues it scans for. 
+    Can be set to run automatically as part of your continuous integration, to help catch vulnerabilities early on. 
+    The files produced by the scns are in "SARIF" (static analysis results interchange format), which is an industry standard format for security scanning tools. This is also what github expects when you upload results to it. 
+
+    Github's CodeQl works out of the box with some interpreted languages like python and javascript or ruby, but needs some extra steps in the workflow to analyze compiled languages. 
+    Basicaly it builds a relational database out of your code and runs the queries against it to detect a variety of potential issues then uploads its findings to your security tab. 
+
+    Docs: https://docs.github.com/en/code-security/code-scanning/automatically-scanning-your-code-for-vulnerabilities-and-errors/about-code-scanning-with-codeql
+
+    To use: go to settings -> security and code scanning (left) -> code scanning section -> select either default or custom and set it up
+
+
+Secret scanning:
+    Secret scanning is a feature that checks to make sure you aren't commiting secrets to your github repo. 
+    If it finds a secret in your repo you'll get an email with instructions on how to remove the secret. 
+    
+    Docs: https://docs.github.com/en/enterprise-cloud@latest/code-security/secret-scanning/about-secret-scanning
+
+Dependabot alerts: 
+    Works similarly to secret scanning but it is looking for known vulnerabilities in commited code. 
+    Can also be set to create its own pull requests to update dependencies to the latest secure version. 
+
