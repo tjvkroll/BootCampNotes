@@ -1,0 +1,6 @@
+Checking out tags of a forked repo: 
+    1) make sure to set the repo you forked from as your upstream, and your new forked repo as your origin
+    2) Next - "git fetch upstream --tags" to get all the upstream tags
+    3) Finally - "git push origin --tags" to push all the upstream's tags to your new forked repo
+
+    Link on how to work with tags in git: https://phoenixnap.com/kb/git-checkout-tag

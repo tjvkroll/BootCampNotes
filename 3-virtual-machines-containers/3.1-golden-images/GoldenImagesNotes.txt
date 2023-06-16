@@ -1,0 +1,97 @@
+Hypervisors: Also known as a Virtual Machine Monitor, is a layer of software, firmware, or hardware that creates, runs, and manages virtual machines. 
+            They stand as an interface between the physical host machine and the virtual enviroments, allocating resources such as processing power, memory, and storage from the host to the VMs. 
+            Hypervisors play a crucial role in maintaining isolation between VMs, ensuring that problems in one VM do not affect others, thereby promoting security and stability in a virtualized enviroment. 
+            
+            
+            Two types of Hypervisors:
+                Type 1: bare-metal Hypervisors, run directly on the host's hardware. Examples include: VMware's ESXi, Microsoft's Hyper-V, and the opensource Xen. 
+                Type 2: Hosted Hypervisors, run on the OS of the host machine. Examples include: Virturalbox or Workstation.
+
+
+
+Golden Images: Also knowns as images or image templates are machine images with pre-configured operating systems. they typically include specialized configs., security patches, and common libraries/tools. Once a golden image is created it can be easily and reliably created identical environments on different hardware or virutal machines.
+
+Different network types for VMs: 
+    Bridged networking - allows the VM to basically show up as an additional computer on the network as my Mac. 
+                         It has the same access to services available on the network to which it is bridged, including file servers, printers, gateways. 
+                         Likewise, any physical host or other VM configured with bridged networking can use resources on the VM as though it were a physical computer on the same network
+                         KNOWN AS: vmnet0
+
+    Host-only networking - Connects the VM to the Mac on a virtual private network, which isn't generally available outside my Mac. 
+                           Multiple VM's configured on my mac all setup with Host-only networking are all on the private network and can see eachother. 
+                           KNOWN AS: vmnet1
+
+    NAT (Network Address Translation) - Often the easiest way to give the virtual machine access to my Mac's network.
+                                        Allows the VM to use VPNs. 
+                                        The VM doesn't have its own IP address on the external network. Instead, a seprarate private network is set up on my Mac. The VM obtains an address on that network from the VMware virtual DHCP server. The VM cannot be contacted by any computers or websites other than the Mac, unless the VM initiates the connection. 
+                                        KNOWN AS: vmnet8
+
+    
+
+
+Adding ssh keys to Debian server:
+    This might very well be specific to Debian VMs
+        On vm add non root user to sudoers file. From root or sudo endable user run '$usermod -aG sudo <user_to_make_sudoer>'
+        switch to user you're sshing into and run both: '$whoami' and 'hostname -I' to get user name and IP address. 
+        Back on local machine, in terminal generate a new ssh key and run "ssh-copy-id <VM_username>@<VM_ip>" to copy over local ssh key into VM
+        from there you should be able to "ssh <VM_username>@<VM_IP>" to get right into your VM       
+
+
+VM snapshots: 
+    Uploads the current state of a VM as a "snapshot" to allow you to revert back to that state or duplicate that state if you need. 
+
+
+Immutable Infrastructure: 
+    Golden images can be a critical part of a very important strategy for managing software enviroments known as Immutable Infrastructure. 
+
+
+Mutable vs Immutable infrastructure: 
+    Mutable: Mutating or modifying in place all aspects of our server. Don't have to worry about moving data from one machine to another or spin up another server. 
+            Possible problems: what if pieces of our upgrade doesn't work. It might cause the server to be in a "partial updrage" or "partial data transaction". Also adds complexity, what if you have 100's of machines that fail in the upgrade at different points? very complex.
+
+    Immutable: Once the server exists, we never try to upgrade that server. We take a snapshot of V1 and use that snapshot to create a brand new server(VM) using the snapshot and upgrade things there. If all upgrades go through we switch traffic to our newly upgraded server. Much lower risk and lower complexity. 
+               To make this work we have to handle data by externalizing it (database). So both versions have access to the data.
+
+
+Toil: the kind of work tied to running a production service that tends to be manual, repetitive, automatable, tactical, devoid of enduring value, and that scales linearly as a service grows
+
+Packer (HashiCorp): An open source tool for creating identical machine images for multiple platforms from a single source configuration. 
+    Ideal for automation, because everything needed is defined in the image config files. 
+    Also makes mantaining and updating images over time more convenient.
+    Other features and use cases: 
+        CD (Continuous Delivery):
+            lightweight, portable, and command-line driven. 
+            New images can be launched and tested, verigying that the infrastructure changes work. 
+        
+        Dev/Prod parity: 
+            Keeps development, staging, and production as similar as Possible
+            can be used to generate images for multiple platforms
+        
+        Configs as code: 
+            Image changes can be maintained and tracked using version control
+        
+        Appliance/Demo Creation
+            Automatically create appliances with software preinstalled
+
+
+
+Finding the Checksum of any file:
+    in linux terminal run either: sha256sum -b <filename>, md5sum -b <filesum> 
+    in mac terminal run: shasum -a 512 <filepath/filename.extension>
+        here you can replace 512 with either 256 or 1 depending on the sha
+
+
+PACKER: 
+
+
+Preseed: 
+    A defined file that can be called in a boot_command to set up an OS during the config step of building an ISO. 
+    Very helpful but hard to find predefined preseeds. 
+
+Provisioner: 
+    A section in your packer build file that allows commands to be preformed after making it through the boot_commands
+    This is where you could install dependencies for the image, add ssh keys, default files, etc. before generating the image. 
+
+
+Link to packer documentation:
+    https://developer.hashicorp.com/packer/docs
