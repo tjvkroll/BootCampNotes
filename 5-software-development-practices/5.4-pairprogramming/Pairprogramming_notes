@@ -1,0 +1,7 @@
+Alternatives to VScode pair programming
+
+AWS Cloud9: This is a cloud based integrated development enviroment used to author and debug source code. With Cloud9, you can quickly share your development environment with your team, enabling you to pair program and track each other's inputs in real-time. In cases where an enterprise does not permit the installation of software on client laptops, Cloud9 still provides a robust means of accessible, pair programming.
+
+Jetbrain's Intellij IDEA: A tool that lets you use the Code With Me plugin to allow participants to share their locally running project with anyone. You can use Code With Me for real-time collaboration, editing code, sharing a server, and running a debugging session.
+
+    Jetbrain's Intellij IDEA is a yearly subscription...

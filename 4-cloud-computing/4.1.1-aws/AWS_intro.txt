@@ -1,0 +1,27 @@
+
+
+Tips for Keeping AWS costs low: 
+    * Use low cost resources, such as t2.micro EC2 instances and EBS storage unless you know you need more performance or memory. 
+    * Stop resources such as EC2 instances when not in use. For example if you are using an instnace for testing  stop it at the end of the day or when you are working on something else. 
+    * Terminate instances and delete associated resources (storage volumes, Elastic IP's, Route53 domain names, etc.). Tags(see below) are a good way to group resources together to make them easy to find and clean up. 
+
+
+Organizing Resources:
+
+Tags - AWS allows customers to assign metadata to their AWS resources in the form of tags. Each tag is a simple label consisting of a customer-defined key and an optional value that can make it easier to manage, search for, and filter resources. Tags provide a flexible way to manage resources. They can provide information about their intended use, how they were created, who is responsible for them, their expected lifetime or anything else. This is especially important for organizations where resources are created and managed by different people or other tools. In order for them to e effictive they should be consistent. Having an organization-wide policy and enforcement for tagging resources can be indispensable. 
+
+    Liatrio Tagging Standards: 
+        Cost accounting tags: 
+        * Client: name of Client
+        * Project: Specific initiative or project name (security swat, Demo pipeline, etc)
+
+        General Information Tags: 
+        * Enviroment: Demo, Test, Production
+        * Application: Descriptive name such as HipChat, Jenkins, etc
+        * Owner: Humanly readable username i.e Slack Handle
+        * Automation Candidate: - Yes, No. Used for automation to auto-terminate services and instances that are not meant to be persistent
+
+Names - Resource names in AWS are actually just tags with the label NAME. Names should easily identify the owner and purpose of the resource and be concise while differentiating it from other resources. As a general naming convention we recommend something like OWNER_NAME-TOOL-NAME which would give you something like "matt-jenkins-master"
+
+
+Console vs CLI:

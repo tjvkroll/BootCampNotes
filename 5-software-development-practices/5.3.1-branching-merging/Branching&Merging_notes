@@ -1,0 +1,31 @@
+Branching:
+
+It allows engineers to work in isolation without disrupting the primary codebase. As multiple engineers work in parallel, each will make changes in their own branch independent of one another. Eventually, they will want to integrate their code into the mainline. Branches should be short-lived andtied to work items.
+
+Merging:
+
+It is the practice of reconcilling changes between version controlled files from one branch to another branch. General merges can be performed effortlessly. Merging should happen as frequently as possible to provide maximum flow, faster feedback, and minimize conflicts.
+
+Branching Strategies:
+
+As software development practices have evolved over time so have opinions about branching strategies. Sometimes these opinions can be contentious issue. Read GitFlow considered harmful and the follow up for some background on opinions of different strategies.
+
+Branching Best Practices:
+
+Liatrios POV:
+
+- Easy to implement and unerstand
+- Minimizes conflicts
+- Allows for testing and feedback to maintain code quality
+- removes bottlenecks and unnecessary overhead
+- makes the history of changes understandable and roling back changes easier
+
+When to create a branch:
+
+A branch should not be created only if required. This is most applicable when delivery teams have a history of creating long-lived release branches, whose changes often do not get meerged into master.
+
+When to merge changes:
+
+Merging should happen as frequently as possible. As teams improve on creating smaller stories and engineers develop a clear way of working around pull requests, developers can merge code multiple times per day.
+
+By eliminating long-lived branches and merging smaller changes directly into a main branch, teams can reduce merge conflicts and release code quicker. This approach is known as truck-based development. To achieve this kind of fast-paced development, without sacrificing quality, it is important to have confidence in the quality of code being commited. This can be accomplished by including automated testing in the continuous integration process. We wil cover automation and testing in more depth later in this chapter.

@@ -1,0 +1,22 @@
+Trying to remember all the steps I went through after the fact:
+
+- set up images for applications I put on ECS (i.e. docker build images)
+
+- Pushed those images to their own repositories on aws's ECR
+
+- created Launch template using an aws certified ecs-optimized AMI
+
+  - In the launch template I added a script to the user data section that added an enviromental variable to the ecs-cluster config file that pointed the instance to which cluster it would be associated with.
+
+- after creating my launch template I made and auto scaling group using the template
+
+- In the cluster setup I selected something that started with a "C" and had the word policy after it that allowed me to link my auto scaling group to my cluster.
+
+- This is where things get fuzzy, I had trouble linking my instance to the cluster and had to make sure I had the right AMI and userdata script.
+
+- Once I got the instances my auto scaling group was creating to show up in the "infrastructure" tab of my cluster I moved onto the task definitions.
+
+- This is where I defined which images were gonna be run on my instances and their specific requirements.
+  - specific requirements in this case were
+    - the port mappings between my api container and the ui container
+    - enviromental variable in the ui container that points to the

@@ -1,0 +1,71 @@
+Scrum:
+
+Scrum is and agile framework for developing, delivering, and sustaining complex products. It is designed for teams of ten or fewer members (two pizza treams), who break their work into goals that can be completed within timeboxed iterations, called sprints, no longer than one month and most commonly two weeks. Then scrum team track progress in time-boxed daily scrum meetings or stand-ups. At the end of the sprint, the team holds a sprint review to demonstrate the work done, and sprint retrospective to continuously improve.
+
+Scrum emphasizes collaboration around breaking goals into timeboxed intervals. Important metrics are sprint burndown, release burnup, and velocity.
+
+- Work is allocated for a sprint, generally two weeks
+- Promotes feedback loops with each sprint
+- Finished work is seen as unused inventory or technical debt until the sprint is closed
+- Does not support continuous deployment as a release would not occur mid-sprint
+- Encourages continuous improvement through reviews and retrospectives after each sprint
+
+Sprint Cadence:
+
+Scurm breaks work into timeboxed sprints. Generally, sprints are one or two weeks, and should not be longer than two weeks. Shorter sprints provide more feedback whicch amplifies the team's learnings ad guides better iterative delivery. Each sprint should have a 1-2 sentence goal describing a quick and easy statement for stakeholders to read and unerstand what the team is working on.
+
+Team Composition:
+
+Generally has a product owner and a development team but other than that it sould include a variety of cross-functional developers to help support and learn from eachother to complete work.
+
+Development team: redefining a developer
+
+Composed of engineers and developers. They are encouraged to self-organize and manage their work, optimizing their effectiveness and efficiency.
+
+Developer team's responsibilities:
+
+- Delivering the work through the sprint
+- To ensure transparency during the sprint they meet daily at the daily standup.
+
+Product Owner:
+
+Agile teams are by design, flexible and responsive, and it is the responsibility of the product owner to ensure that they are delivering the most value. The business is represented by the product owner who tells the development team what is important to deliver. Trust between these two roles is crucial.
+
+Product owners should not only understand the customer, but also have a vision for the value that the team is delivering to a customer. The product owner also balances the needs of other stakeholders in the organization.
+
+Product owner's responsibilities:
+
+- Managing the scrum backlog
+- Stakeholder management
+
+Scrum Master:
+
+Some teams may have a scrum master who is responsible for gluing everything together and ensuring that scrum is being done well. In practical terms, that means they help the product owner define value, the development team deliver the value, and the scrum team improve over time.
+
+Ceremonies:
+
+Establising a base for the team's ceremonies helps create a rhythm and cadence. Utilizing agile practices of the scrum framework, teams typically hae the following core ceremonies to ensure teams are aligned and focused on high priority items, and to support continuous learning efforts.
+
+Backlog refinement:
+
+A well-prioritized agile backlog not onl makes release and iteration planning easier, ut it broadcasts all the things your team intends to spend time on - including internal work that the customer will never notice. This helps set expectations with stakeholders and other teams. especially when they bring additional work to you, and makes engineering time a fixed asset.
+
+Sprint Planning:
+
+The purpose of sprint planning is to define what can be delivered in the sprint and how that work will be achieved. Sprint planning is doen in collaboration with the whole scrum team. A well-defined backlog brought into the sprint should result in an effecient session reviewing the stories points, and acceptance criteria.
+
+Stand up:
+
+Each day, the scrum team gathers to discuss the day's work. Although it can easily become a mundane meeting, it should remain as a sharp, crisp, critical touchpoint. Able to lead by anyone on the team, there are two common approaches to running a standup:
+
+Walk the board: This approach looks at the tickets on the board and reviews the status of each. The emphasis of WTB is thw work in progress.
+
+Around the room: This approach asks everyone on the team the following questions, highlighting individual progress and blockers.
+
+- What did I do yesterday?
+- What am I doing today?
+- Are there any blockers?
+
+Sprint Review:
+
+As teams close out their sprint, they should dedicate an hour to conduct a demo in retrospective. This allows teams to showcase their work to one another and to stakeholders. Retros enable teams to consider what worked well and what did not work well, providing opportunities for ongoing learning and improvement.

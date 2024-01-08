@@ -1,0 +1,31 @@
+Azure provides a wide variety of cloud computing services, from simple services like virtual machines to more complex services such as machine learning and cognitive search. 
+
+Accounts, Tenants, and Subscriptions
+    When a new Azure account is created, a new Azure Active Directory (AzureAD) tenant is automatically created with a default directory. Each tenant can have multiple subscriptions, which act as billing containers. Whitin each subscription, there can be many resource groups. Resource groups contain the actual resources (e.g virtual machines, storage accounts).
+
+    Azure AD Tenant -> Subscription -> Resource Group -> resources
+
+    In many enterprises, this azure AD tenant is synchronized with an on-prem Active Directory enviroment, allowing users to authenticate to applications on-prem or in the cloud with the same identity. 
+
+Cost Management
+
+    Cost Calculator to help estimate most services:
+    https://azure.microsoft.com/en-us/pricing/calculator/
+
+
+Organizing Resources:
+    Overview:
+        Organizing resources in Azure or any other cloud platform is important to properly manage securty and costs. Deploying hundreds or thousands of resources in the cloud is only possible when using a carefully planned stategy for organizing your resources. The sections below describe the various options for organizing resources in azure. 
+
+    Management Groups:
+        Management groups in Azure are a way to group multiple subscriptions or even other management groups. The use of Management Groups isn't mandatory, but using them has advantages for larger enterprises. It allows large enterprises to reflect their organizational structure in Azure and apply policy and access control basd on that structure. 
+
+    Subscriptions:
+        Subscriptions in Azure are logical containers to create billing separation. Each subscription can only be associated with one Azure AD tenant. It is common practice to have separate subscriptions for different environments (Dev, Prod, QA) or different departments within an enterprise. 
+
+    Resource Groups:
+        Resources within subscriptions must be contained within a Resource Group. It is common practice for all resources related to a particular application to be contained within a single resource group. Every time you deploy a resource in Azure, you must deploy it into an existing Resource Group or create a new one. 
+
+    Resource Naming and Tagging:
+        In most cases the name of a resource in Azure is immutable, so changing it later requires the destruction of the resource! Considering this, it is certainly a good idea to have a well though out naming convention ahead of time. It is important to note that different resources in Azure hae unique restrictions on naming, such as length or what characters are allowed. 
+        Similar to naming conventions, haveing a well thought out tagging strategy is a good idea. Tags in Azure work basically the same as AWS, whereby they can provide information about the intended use of a particular resource, who the owner is, data classification, or other important metadata. 

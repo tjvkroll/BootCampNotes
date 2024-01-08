@@ -1,0 +1,109 @@
+Container vs VM:
+    Containers and VMs have similar resource isolation and allocation benefits, but function differently because containers virtualize the operating system instead of hardware. Containers are more portable and efficient. 
+
+What is a Container:
+    It is software that packages up code and all of its dependencies so the application runs quickly and reliably from one enviroment to another. 
+    Docker container image is lightweight, standalone, executable package that includes everything you need to run an application:
+        code
+        runtime
+        system tools and libraries
+        settings
+    Container images become containers at runtime, in the case of docker containers; images become containers when they run on Docker Engine. 
+    Containers isolate software from its enviroment and ensure that it works uniformly despite differences.
+
+Docker: 
+    Docker is often used sync
+
+Docker Engine: 
+    Industy's de facto container runtime that runs on various linux and windows server operating systems. 
+    It enables containerized applications to run anywhere consistently on any infrastructure, solving the "dependency hell" for developers and operations teams, and eliminating the "it works on my laptop!" problem. 
+
+    Key Features and capabilities:
+        Powered by containerd - Containerd implements Kubernetes Container Runtime Interface and is widely adopted across public clouds and enterprises. 
+        Integrated Buildkit - Buildkit is a tool that takes instructions from a Dockerfile and "builds" a Docker images. This process can take a long time so Buildkit provides several architectural enhancements that makes it much faster, more precise, and portable. 
+        Docker CLI - The most popular way to interface with Docker containers is the Docker CLI - a simple, yet powerful client that greatly simplifies how you manage container instances through a clear set of commands. 
+
+
+Containers vs VM's (deeper level):
+    Containers are an abstraction at the app layer that packages code and dependencies together. Multiple containers can run on the same machine and share the OS kernel with other containers, each running as isolated processes in user space. Containers take up less space than VMs(rougly tens of MBs in size), can handle more applications, and require fewer VMs and Operating systems. 
+    VMs are an abstraction of physical hardware turning one server into many servers. The hypervisor allows multiple VMs to run on a single machine. Each VM includes a full copy of an operating system, the application, necessary binaries and libraries - taking up tens of GBs. VMs can also be slow to boot. 
+
+Docker containers that run on Docker Engine: 
+    Standard - Docker created the industry standard for containers so they could be portable anywhere 
+
+    Lightweight - Containers share the machine's OS system kernel and therefore don't require an OS per application, driving higher server efficiencies and reducing server licensing costs
+
+    Secure - Applications are safer in containers and docker provides the strongest default isolation capabilities in the industry
+
+Containers and DevOPs:
+    Since containers allow you to easily package an applications code, configurations, and dependencies into easy to use building blocks. They can help to ensure that applications deploy quickly, reliably, and consistently regardless of the deployment enviroment. This enables the following benefits:
+        Developer Productivity - Containers enable engineers to run newly developed applications and services in teh same infrastructure thata their applications will run on in production. This creates a faster feedback loop for engineers about application changes. 
+
+        Enviromental Consistency & Versioning - Container images are a point in time capture of an application's code, config, and dependencies. These images are able to be versioned per build, and each artifact is considered immutable. Deployments are represented as code, tagged, and versioned for auditability and clarity. 
+
+        Operational Efficiency - Being able to build, test, ship, and run the exact same container without being able to change things about the container through all stages of the software delivery life cycle makes deliverying a high quality, reliable application considerably easier. Contiuous Integration servers can run the same contianer artifact through multiple stages, including integration tests, static code scanning, load testing, and functional testing, all to make sure the artifact passes known quality gates. 
+
+        Resource Density - Containers maximize the hardware by allowing multiple processes to run on a single piece of hardware or a logical cluster of hardware. Efficiency is a result of the isolation and allocation techniques that managed container services use. This allows for better projected utilization costs, as well as capacity planning for existing and future scaling for traffic needs, and experimentation without costly enviroment spin-up. 
+
+
+Images vs Containers: 
+    Image - An executable package that includes everything needed to run an application -- the code, a runtime, libraries, enviroment variables, and configuration files. They are basically the building blocks of Docker. They define what is in a container. They can be used by other images to extend 
+        Provides a custom file system for the container, however because of this it must contain everything the container needs to run an application; all dependencies, configs, scripts, binaries, etc. 
+        The image also contains enviroment variables, a default command to run and other metadata. 
+
+    Container - A runtime instance of an image -- what the image becomes in memory when executed (that is, an image with state, or a user process). You can also think of it as a sandboxed process on your machine that is isolated from all other processes on the host machine. 
+        Can be run on local machines, virtual machines, or deployed to the cloud. 
+        They're portable (can be run on any OS)
+        They're isolated from other containers and runs its own software, binaries, and configurations. 
+
+
+NOTE ABOUT DOCKER DESKTOP ON OSX:
+    It limits the amount of resources containers can use by default. If you experience performance issues with resource intensive continers, make sure to increase the resources available. 
+        HOW: Docker Desktop Icon -> Preferences -> Advanced
+
+Building Images:
+    Docker images are built by defining a set of steps to create the image in a DOCKERFILE. Each step begins with a single word instruction, which are uppercase by convention, followed by arguments all on the same line. The image is then built by running "docker build PATH_TO_DOCKERFILE"
+
+    When building images:
+        make sure to use offical images from dockerhub instead of installing tools manually. 
+        
+        Tag specific base image versions to avoid getting the most recent version which might cause dependency errors. 
+        
+        Use specialized images. Images should be specialized for a specific purpose and not contain any unnecessary packages or tools. 
+        
+        All docker images, even a specialized image without any unnecessary packages or tools, still requires security updates. Security updates should be part of the development process. There are tools like dependabot to make it easier. 
+
+    Layers: 
+        A Docker image consists of read-only layers each of which represents a dockerfile instruction. The layers are stacked and each one is a delta of the changes from the previous layer. Care must be taken when designing a Dockerfile to optimize both the time it takes to build the image as well as the size of the image that is created. 
+            Layers reduce the time it takes to build the image through caching 
+
+    Order of instructions:
+        Docker will cache layers from previous builds to decrease the time required to build images. However, once Docker detects that a layer needs to be rebuilt, then all layers after it must also be rebuilt.
+
+    Dependency Layer: 
+        Downloading dependencies for an application can be an expensive operation. You can leverage Docker layer caching to avoid this in image build time by having a separate layer that resolves the dependencies for the application. 
+
+    Multi-stage builds: 
+        One of the most challenging things about building images is keeping the images size down. Each instruction in the Dockerfile adds a layer to the image, and you need to remember to clean up any artifacts you don't need before moving on to the nexy layer. With multi-stage builds, you use multiple "FROM" statements in your dockerfile. Each "FROM" instruction can use a different base, and each of them begins a new stage of the build. You can selectively copy artifacts from one stage to another, leaving behind everything you don't want in the final image. 
+
+    Build from source: 
+        In order to ensure repeatability of image builds, you should put as much of the build process as possible inside the Dockerfile. For example, if you run Gradle to build a jar from your workspace and then have the Dockerfile copy in the jar file, you run the risk of other developers not having the same tools on their workspace. In order to mitigate that, install and run Gradle from within the Dockerfile. 
+
+    Separate build stage: 
+        The concern with running the build within your Dockerfile is the additional space consumed by the image for all the build tools. This can be addressed through the use of a separate stage for the build. 
+
+
+Processes: 
+    The final step in the Dockerfile is to run the application using a process command. The recommendation is to separate areas of concern by using one process per container. 
+        Simpliciy - Running multiple processes within a container requires additional scripting within the container to coordinate the startup of each process. 
+
+        Reliability - When the foreground process for a container exits, the container orchestrator can automatically restart the container. If there is more than one process, and it exits, it is up to you to manage the restart of the process within the container rather than allowing the orchestrator to restart it. 
+
+        Scalability - If one process requires additional capacity and triggers an auto-scaling event, then all processes within the container are also scaled. 
+
+DockerHub: 
+    This is an online Docker image registry where users can upload their ready-built images, or pull down images uploaded by the docker community. Similar to Atlas for Vagrant boxes, Docker Hub is driven by its users. If there isn't an image available with the features you want, you can make one and upload it yourself. 
+
+Docker Best Practices:
+    Docker has a link to its best practices to make your life easier: 
+        https://docs.docker.com/develop/develop-images/dockerfile_best-practices/

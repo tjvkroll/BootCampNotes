@@ -1,0 +1,52 @@
+Kubernetes:
+    It is a portable, extensible open-source platform for managing containerized workloads and services, that facilitates both declarative configuration and automation. 
+
+From Kubernetes site "Why you need Kubernetes and what it can do":
+    Containers are a good way to bundle and run your applicationns. In a production environment, you need to manage the containers that run the applications and ensure that there is no downtime. For exampl, if a container goes down, another contianer needs to start. Wouldn't it be easier if this behavior was handled by a system?
+
+    That's how Kubernetes comes to the rescue! Kubernetes provides you with a framework to run distributed systems resiliently. It takes care of scaling and failover for your application, provides deployment patterns, and more. For example: Kubernetes can easily manage a canary deployment for your system. 
+
+Kubernetes Architecture:
+    Cluster:
+        A Kubernetes cluster is a set of node machines for running containerized applications. The Kubernetes Master is a collection of three processes that run on a single node in your cluster, which is designated as the master node. 
+        Those processes are:
+            kube-apiserver
+            kube-controller-manager
+            kube-scheduler
+    
+    Node:
+        The nodes in a cluster are the machines (VMs, physical servers, etc) that run the applications and workflows. The Kubernetes master controls each node. 
+
+    Pods:
+        A pod is the basic execution unit of a Kubernetes application - the smallest and simplest unit in the Kubernetes object model that you create or deploy to run containers. 
+
+    Services:
+        A service is an abstraction that defines a logical set of Pods and a policy by which to access them. As pods are created, scaled, and destroyed over an application's lifetime the node they are running on and their IP addresses will change. A service provides a consistent way to communicate with a set of pods regardless of how many pods there are or where they are running. 
+
+    Deployments:
+        Deployments abstract away the low-level details of managing pods. Behind the scenes, Deployments rely on Replica sets to manage starting, stopping, and scaling, and restarting the pods if they happen to go down for some reason. Below is an example illustration of a deployment. 
+
+    Labels and Selectors
+        Labels: 
+            Labels are key/value pairs that are attached to objects, such as pods. Labels are intended to be used to specify identifying attributes of objects that are meaningful and relevant to users, but do not directly imply semantics to the core system. Kubernetes provides built-in support for querying objects via labels and applying bulk operations on the subset selected. 
+
+        Via a Label selector, the client/user can identify a set of objects with the same labels. The label selector is the core grouping primitive in Kubernetes. 
+
+        A LIST operation may specify label selectors to filter the set of objects returned using a query parameter. 
+            For example, if we had two separate Pods witht the same labels "enviroment=production, tier=frontend", we can filter these two pods by running "kubectl get pods -l environment=production, tier=frontend". The "-l" is not limited to "get" commands, you can use them with other commands such as "kubectl logs -l tier=frontend" to view logs of all Pods with that label. 
+
+                for more info on labels and selectors follow this link:
+                    https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+
+
+Quick link to kubectl CLI commands: 
+    https://kubernetes.io/docs/reference/kubectl/
+
+
+By default pods are only accessible by its internal IP address within the Kubernetes cluster. To make a container accessible from outside the Kubernetes virtual network, you have to expose the POD as a kubernetes service. 
+    link to services docs:
+        https://kubernetes.io/docs/concepts/services-networking/service/
+
+
+First decent link to using .yml files to configure kubernetes objects:
+    https://kubernetes.io/docs/concepts/overview/working-with-objects/

@@ -1,0 +1,130 @@
+Managing infrastructure
+
+Nexus OSS: 
+    This is a versioned artifact repo. It is used to store multiple versions of different packages and supports different repository types like Maven, npm, Docker, etc. It is scalable and integrates with lots of other software delivery tools. 
+    This repository manager organizes, stores, and distributes artifacts needed for development. With Nexus, developers can completely control access to, and deployment of, every artifact in an organization from a single location, making it easier to distribute software. 
+    Once pulished to the central repository, a component and the metadata describing that component never change. This property of a release repo, like the central repository, guarantees that projects that depend on releases will be repeatable and stable over time. Once a component is assigned a release number on the Central Repo, there is a strict policy against modifying the contents of a software component after a release. 
+    The central repo contains cryptographic hashes and PGP signitures that can be used to verify the authenticity and integrity of software components served and supports connections in a secure manner via HTTPS. 
+
+    Two core features: 
+        The ability to proxy a remote repo and cache compnents saving both bandwith and time required to retrieve a software component from a remote repo repeatedly. 
+        The ability to host a repo providing an organization with a deployment target for internal software components. 
+
+    Component Coordinates and Repo Format: 
+        Follows mavens GAV (Group, Artifact, Version) standard that lends to the ability to manage dependencies. 
+            GroupID - A group id groups a set of components into a logical group. Groups are often designed to reflect the organization under which a particular software component is being produced.
+            ArtifactID - An artifactID is an identifier for a software component and should be a desscriptive name. The combo of group and artifact id must be unique for a specific project. 
+            Version - The version of a project ideal follows the established convention of semantic versioning (major_release.minor_release.point_release_version). Versions can also have alphanumeric qualifiers which are often used to denote release status. 
+    
+    A Maven repo stores two types of components: releases and snapshots
+        Releases are for stable, static release components. 
+        Snapshots are frequently updated repos that store binary software compnents from projects under constant development. 
+
+    How is it different than github: 
+        Github belongs to "Code Collaboration & Version Control" category of the tech stack, while Sonatype Nexus can be primarily classified under "Java Build Tools"
+
+    Installing Nexus with a docker image: 
+        https://hub.docker.com/r/sonatype/nexus3/
+
+    
+
+
+Delivery Pipeline: 
+    Automated delivery pipelines accelerate software delivery and enable faster, safer deployments. 
+    An entire integrated toolchain is necessary to leverage the capabilities of an automated pipeline, orchestrated by a build server. 
+    Newly committed code that is pushed to the git server will trigger a webhook and cause the build servers to run certain tasks.
+    General stages of a delivery pipeline include: 
+        Unit testing
+        Code quality scanning
+        Building artifacts (compiling, packaging, containerizing, etc.)
+        Publishing artifacts to an artifact repository
+        Functional Testing
+        Deploying artifacts
+
+
+
+
+
+
+
+
+
+
+
+
+Changes to move over for new fork: 
+
+Pom xml: 
+
+
+<!-- Designating remote repo to upload to (in this case nexus) -->
+  <distributionManagement>
+    <repository>
+      <id>DOB</id>
+      <name>DOB-release</name>
+      <url>http://172.16.197.147:8081/repository/DOB-release/</url>
+    </repository>
+    <snapshotRepository>
+      <id>DOB</id>
+      <name>DOB-snapshot</name>
+      <url>http://172.16.197.147:8081/repository/DOB-snapshot/</url>
+    </snapshotRepository>    
+  </distributionManagement>
+
+
+
+src/checkstyle/...suppressions.xml:
+
+	<suppress files="pom.xml" checks="NoHttp"/>
+
+
+
+
+Workflow: 
+
+name: Java CI with Maven
+
+on:
+  workflow_dispatch:
+
+jobs:
+  build:
+
+    runs-on: self-hosted
+    strategy:
+      matrix:
+        java: [ '17' ]
+
+    steps:
+
+      - uses: actions/checkout@v3
+      - name: Set up JDK ${{matrix.java}}
+        uses: actions/setup-java@v2
+        with:
+          java-version: ${{matrix.java}}
+          distribution: 'adopt'
+          cache: maven
+      
+      - name: cleaning old artifact data
+        run: ./mvnw clean
+      
+      - name: building and storing artifact locally
+        run: ./mvnw -B package
+        
+      - name: creating settings.xml
+        run: |
+          echo "<settings xmlns='https://maven.apache.org/SETTINGS/1.0.0' \
+            xmlns:xsi='https://www.w3.org/2001/XMLSchema-instance' \
+            xsi:schemaLocation='https://maven.apache.org/SETTINGS/1.0.0 \
+            http:s//maven.apache.org/xsd/settings-1.0.0.xsd'> \
+              <servers> \
+                <server> \
+                  <id>DOB</id> \
+                  <username>admin</username> \
+                  <password>${{ secrets.NEXUSPASSWORD }}</password> \
+                </server> \
+              </servers> \
+            </settings>" > ${{ github.workspace }}/settings.xml
+      
+      - name: Deploying to nexus
+        run: ./mvnw deploy --settings ${{ github.workspace }}/settings.xml

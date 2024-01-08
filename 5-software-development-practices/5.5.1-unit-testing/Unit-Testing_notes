@@ -1,0 +1,17 @@
+Unit Testing:
+
+Unit testing is the process of verifying that specific units of code are working as expected. Unit tests are typically concise in nature, and they make assertations against a very specific part of the codebase - usually a single function.
+
+The process for writing a unit test might look something like this:
+
+1. Identify a function/method as the system under test (SUT)
+2. Invoke the function/method with predefined arguments.
+3. Observe the return value(s) of the funtion/method, and assert that they match the expected return value(s).
+
+Unit testing is most effective against smaller functions that are scoped to a singular task. Functions that do multiple tasks are typically more complex, and their input/output will usually reflect that.
+
+Unit tests should be able to execute in isolation without requiring any other dependencies to be present. Functions that are more complicated to test might also need to incldue mocks or stubs in order to fake some behavior, which will allow these tests to run in complete isolation. For example, a function that makes an HTTP request to a server during its execution shoudl not do so when running the assiociated tests for this function. Instead, the code that performs the HTTP request should be replaced wiht a mock to simulate this.
+
+This alows unit tests to run quickly and consistently across all environments. Developers running unit tests on their own machines should see the same test results as a CI server.
+
+Fast and consistent feedback is extremely important when dealing with unit tests because a slow or flaky test suite will discourage developers from running tests and contributing more tests to the codebase.

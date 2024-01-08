@@ -1,0 +1,32 @@
+EKS is Amazons way of integrating K8s into their container orchestration. It makes it easy to stand up or maintain your own K8s control plane. EKS runst he K8s management infrastructue behind the scenes so that the user only has to worry about adding worker nodes to their cluster. It uses "kubectl" to simplify its use.
+
+K8s components:
+They're divided into two main catagories, components that live on the control plane and components included with every worker node.
+
+Control Plane Components:
+These make decisions about the cluster at a global level, such as storing the state of the cluster or scheduling different workloads.
+
+      - kube-api-server: The kube-api-server is the component that exposes the Kubernetes API. It acts as a frontend of a K8s cluster.
+
+      - ectd: This is a key-value store, it acts as data storage for a kubernetes cluster.
+
+      - kube-scheduler: The kube-scheduler is the process that assigns pods to run on particular worker nodes.
+
+      - kube-controller-manager: The kube-controller-manager is a collection of different controllers each of which is handling a separate task, such as responding to worker node failure, or managing replication of pods. Each controller-manager follows separate logic, but they ru as a single process for simplicity.
+
+      NOTE: This is not a comprehensive list but covers important components.
+
+Worker Node Components:
+These need to run on every worker node in the cluster, such as the agent to start up a Docker container.
+
+    - kubelet: The kubelet is the primary K8s agent process that runs on each worker node. It handles tasks such as informing the API server that the node is healthy and starting containers that are scheduled to run on the node.
+
+    - kube-proxy: The kube-proxy is the networking agent which runs on every worker node in the cluster. it maintains networking rules on nodes to allow pods to communicate based on the configuration of the cluster.
+
+Service Types:
+
+- ClusterIP: The default service type in K8s. It exposes a service using an internal-cluster IP; no external access is configured.
+
+- NodePort: Exposes the service on each node's IP in a cluster using a single, static port (the NodePort). NodePort services can be contacted outside of the cluster using <NodeIP>:<NodePort>. A ClusterIP service, to which the NodePort Service routes, is automatically created.
+
+- LoadBalancer: Exposes a service using a cloud provider's load balancer. NodePort and ClusterIP Services, to which the external load balancer routes, are automatically created.
